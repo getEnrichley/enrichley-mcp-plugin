@@ -12,7 +12,7 @@ Keep these versions identical:
 
 Any change under `skills/`, `assets/`, either plugin manifest directory, `.agents/plugins/`, `.app.json`, `.mcp.json`, or `server.json` requires a higher semantic version. CI enforces this with `scripts/check-release-version.mjs`.
 
-Version `0.1.8` is the current distribution-integrity release. Public repository, contract, package, manifest, Claude, and Codex validations pass. MCP behavior and runtime contracts are unchanged.
+Version `0.1.9` is the additive Business Context distribution release. It updates the public package and skill for the 27-tool MCP surface without changing the production endpoint, app identity, authentication flow, billing safeguards, or existing lead-search workflows. Fresh authenticated host verification is pending.
 
 ## Release the repository
 

@@ -18,6 +18,8 @@ const expectedTools = [
   "enrichley_search_company_lookalike_industries",
   "enrichley_search_company_lookalike_states",
   "enrichley_search_company_lookalike_cities",
+  "enrichley_list_business_context_profiles",
+  "enrichley_get_business_context",
   "enrichley_get_result_schema",
   "enrichley_preview_people_search",
   "enrichley_preview_company_lookalike",
@@ -32,12 +34,12 @@ const expectedTools = [
 
 const validContract = {
   schemaVersion: 1,
-  contractVersion: "1.0.0",
+  contractVersion: "1.1.0",
   packageName: "enrichley",
   appId: "asdk_app_6a8f9322fe748191b78a730e8c384bf5",
   serverName: "io.enrichley/enrichley",
   endpoint: "https://mcp.enrichley.io/mcp",
-  toolCount: 25,
+  toolCount: 27,
   groups: [
     { name: "Account", count: 1 },
     { name: "Jobs and downloads", count: 5 },
@@ -45,6 +47,7 @@ const validContract = {
     { name: "Company Lookalike", count: 9 },
     { name: "Email Finder", count: 2 },
     { name: "Email Validation", count: 1 },
+    { name: "Business Context", count: 2 },
   ],
   tools: expectedTools,
 };
@@ -81,21 +84,21 @@ expectRule("contract-endpoint", (candidate) => {
   candidate.endpoint = "https://example.invalid/mcp";
 });
 expectRule("contract-tool-count", (candidate) => {
-  candidate.toolCount = 24;
+  candidate.toolCount = 26;
 });
 expectRule("contract-tool-duplicate", (candidate) => {
-  candidate.tools[24] = candidate.tools[23];
+  candidate.tools[26] = candidate.tools[25];
 });
 expectRule("contract-tool-order", (candidate) => {
   [candidate.tools[0], candidate.tools[1]] = [candidate.tools[1], candidate.tools[0]];
 });
 expectRule("contract-tool-set", (candidate) => {
   candidate.tools.splice(12, 1);
-  candidate.toolCount = 24;
+  candidate.toolCount = 26;
 });
 expectRule("contract-tool-set", (candidate) => {
   candidate.tools.push("enrichley_unknown_public_tool");
-  candidate.toolCount = 26;
+  candidate.toolCount = 28;
 });
 expectRule("contract-group-counts", (candidate) => {
   candidate.groups[2].count = 8;
@@ -110,6 +113,8 @@ for (const lookupTool of [
   "enrichley_search_company_lookalike_industries",
   "enrichley_search_company_lookalike_states",
   "enrichley_search_company_lookalike_cities",
+  "enrichley_list_business_context_profiles",
+  "enrichley_get_business_context",
 ]) {
   assert.match(publicSkill, new RegExp(`\\b${lookupTool}\\b`));
 }

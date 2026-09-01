@@ -23,9 +23,9 @@ Do not commit:
 
 Detailed release and runtime evidence belongs in Enrichley's private operational records. The public release ledger records only package version, public contract, host compatibility, and a public verification outcome.
 
-## Current distribution-integrity release
+## Current distribution release
 
-Version `0.1.8` is the current distribution-integrity release. Public repository, contract, package, manifest, Claude, and Codex validations pass. MCP tools, schemas, behavior, endpoints, authentication flows, billing rules, customer workflows, and runtime contracts are unchanged.
+Version `0.1.9` is the additive Business Context distribution release. The public contract contains 27 tools and the bundled skill adds optional customer-owned Business Context guidance. The production endpoint, app identity, authentication flow, billing safeguards, and existing lead-search workflows remain unchanged. Fresh authenticated host verification is pending.
 
 ## Publishing identity
 

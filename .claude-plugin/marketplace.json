@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Official Enrichley plugin marketplace: connect AI agents to Enrichley's lead generation and enrichment platform.",
-    "version": "0.1.8"
+    "version": "0.1.9"
   },
   "plugins": [
     {
       "name": "enrichley",
       "source": "./",
-      "description": "Find and enrich B2B leads with Enrichley: People Search, Company Lookalike, Email Finder, and Email Validation from your AI agent."
+      "description": "Use Business Context and find or enrich B2B leads with People Search, Company Lookalike, Email Finder, and Email Validation."
     }
   ]
 }

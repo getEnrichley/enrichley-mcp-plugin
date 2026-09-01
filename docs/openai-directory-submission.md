@@ -64,7 +64,7 @@ The production server must advertise explicit `readOnlyHint`, `openWorldHint`, a
 
 | Tool class | Annotation values | Portal justification |
 | --- | --- | --- |
-| Account, job, discovery-list, vocabulary, status, and quote reads | `readOnly=true`, `openWorld=true`, `destructive=false` | Reads customer-owned or live Enrichley/provider data and does not create, update, delete, charge, or start work. It accesses an external service, so it is open-world. |
+| Account, Business Context, job, discovery-list, vocabulary, status, and quote reads | `readOnly=true`, `openWorld=true`, `destructive=false` | Reads customer-owned or live Enrichley/provider data and does not create, update, delete, charge, or start work. It accesses an external service, so it is open-world. |
 | Static result schema and download handoff | `readOnly=true`, `openWorld=false`, `destructive=false` | Returns reviewed schema or bounded handoff metadata without changing state or interacting with a third party beyond the closed Enrichley system. |
 | Discovery creation and update | `readOnly=false`, `openWorld=true`, `destructive=false` | Creates or updates a customer-owned saved discovery. The change is reversible and starts no paid work. |
 | People Search and Company Lookalike preview | `readOnly=false`, `openWorld=true`, `destructive=false` | Executes and may persist a preview or consume preview allowance, but creates no paid run and is not destructive. It queries external provider data. |

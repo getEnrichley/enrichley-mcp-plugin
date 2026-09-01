@@ -1,7 +1,7 @@
 {
   "name": "enrichley",
-  "version": "0.1.8",
-  "description": "Find and enrich B2B leads with Enrichley: People Search, Company Lookalike, Email Finder, and Email Validation from your AI agent.",
+  "version": "0.1.9",
+  "description": "Use Business Context and find or enrich B2B leads with People Search, Company Lookalike, Email Finder, and Email Validation.",
   "author": {
     "name": "Enrichley",
     "email": "agent@enrichley.com",
@@ -16,10 +16,11 @@
   "interface": {
     "displayName": "Enrichley",
     "shortDescription": "B2B lead search and enrichment",
-    "longDescription": "Build B2B audiences with People Search and Company Lookalike, find and validate email addresses, preview targeting, review credit quotes, and download completed lead-search results.",
+    "longDescription": "Use saved Business Context to guide targeting, build B2B audiences with People Search and Company Lookalike, find and validate email addresses, preview targeting, review credit quotes, and download completed lead-search results.",
     "developerName": "Enrichley",
     "category": "Business & Operations",
     "capabilities": [
+      "Read saved Business Context",
       "Search people and companies",
       "Find and validate emails",
       "Preview targeting and results",

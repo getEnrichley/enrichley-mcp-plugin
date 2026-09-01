@@ -10,9 +10,28 @@ This ledger records only public package and compatibility facts. Infrastructure 
 4. Do not record credentials, user or account identifiers, infrastructure topology, private repository names, deployment identifiers, or non-public source revisions.
 5. A host is marked verified only after a fresh conversation loads exactly one production Enrichley connector and the expected skill version.
 
+## 0.1.9 — Business Context distribution
+
+Status: **current additive distribution release**. The package and skill describe the public 27-tool surface; fresh authenticated host verification is pending.
+
+| Field | Public value |
+| --- | --- |
+| Plugin version | `0.1.9` |
+| Package purpose | Add optional customer-owned Business Context guidance and synchronize the exact public tool contract |
+| Production MCP endpoint | `https://mcp.enrichley.io/mcp` |
+| Public tool contract | 27 tools; adds two read-only Business Context tools |
+| Host impact | Additive skill and catalog guidance; existing lead-search behavior is unchanged |
+
+### Public verification status
+
+- Public repository, boundary, contract, package, and manifest checks pass locally.
+- The two Business Context tools are read-only, non-destructive, and debit zero credits.
+- Fresh authenticated host verification is pending.
+- No preview, quote confirmation, paid run, download, credential, or customer-data mutation was used for this package release.
+
 ## 0.1.8 — Distribution-integrity release
 
-Status: **current package-only release**. MCP tools, schemas, behavior, endpoints, authentication flows, billing rules, customer workflows, and runtime contracts are unchanged.
+Status: **superseded distribution-integrity release**. MCP tools, schemas, behavior, endpoints, authentication flows, billing rules, customer workflows, and runtime contracts were unchanged in this release.
 
 | Field | Public value |
 | --- | --- |

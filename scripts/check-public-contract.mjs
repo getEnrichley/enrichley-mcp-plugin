@@ -4,12 +4,12 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const expectedFacts = Object.freeze({
   schemaVersion: 1,
-  contractVersion: "1.0.0",
+  contractVersion: "1.1.0",
   packageName: "enrichley",
   appId: "asdk_app_6a8f9322fe748191b78a730e8c384bf5",
   serverName: "io.enrichley/enrichley",
   endpoint: "https://mcp.enrichley.io/mcp",
-  toolCount: 25,
+  toolCount: 27,
 });
 
 const expectedGroups = Object.freeze([
@@ -19,6 +19,7 @@ const expectedGroups = Object.freeze([
   Object.freeze({ name: "Company Lookalike", count: 9 }),
   Object.freeze({ name: "Email Finder", count: 2 }),
   Object.freeze({ name: "Email Validation", count: 1 }),
+  Object.freeze({ name: "Business Context", count: 2 }),
 ]);
 
 const expectedTools = Object.freeze([
@@ -37,6 +38,8 @@ const expectedTools = Object.freeze([
   "enrichley_search_company_lookalike_industries",
   "enrichley_search_company_lookalike_states",
   "enrichley_search_company_lookalike_cities",
+  "enrichley_list_business_context_profiles",
+  "enrichley_get_business_context",
   "enrichley_get_result_schema",
   "enrichley_preview_people_search",
   "enrichley_preview_company_lookalike",
@@ -80,10 +83,12 @@ const privateFieldNames = new Set([
   "split",
   "topology",
 ]);
-const requiredLookupReferences = Object.freeze([
+const requiredSkillReferences = Object.freeze([
   "enrichley_search_company_lookalike_industries",
   "enrichley_search_company_lookalike_states",
   "enrichley_search_company_lookalike_cities",
+  "enrichley_list_business_context_profiles",
+  "enrichley_get_business_context",
 ]);
 const spendSafetyPatterns = Object.freeze([
   /prepare a run quote/i,
@@ -190,7 +195,7 @@ export function findPublicContractRuleIds(contract, skillText) {
 export function findPublicSkillRuleIds(skillText) {
   const rules = [];
   const references = toolReferences(skillText);
-  if (requiredLookupReferences.some((reference) => !references.includes(reference))) {
+  if (requiredSkillReferences.some((reference) => !references.includes(reference))) {
     addRule(rules, "contract-skill-required-reference");
   }
   if (spendSafetyPatterns.some((pattern) => !pattern.test(skillText))) {

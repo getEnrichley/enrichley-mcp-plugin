@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.enrichley/enrichley",
-  "description": "B2B People Search, Company Lookalike, Email Finder, and Email Validation for AI agents.",
+  "description": "Business Context and B2B People Search, Company Lookalike, Email Finder, and Email Validation.",
   "version": "0.1.0",
   "websiteUrl": "https://enrichley.io",
   "repository": {

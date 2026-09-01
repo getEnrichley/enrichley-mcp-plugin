@@ -1,6 +1,6 @@
 # Enrichley MCP Plugin
 
-Use [Enrichley](https://enrichley.io) from ChatGPT, Codex, Claude, and other AI agents: B2B **People Search**, **Company Lookalike**, **Email Finder**, and **Email Validation**, with previews, upfront credit quotes, and customer-run downloads for completed People Search and Company Lookalike results.
+Use [Enrichley](https://enrichley.io) from ChatGPT, Codex, Claude, and other AI agents: customer-owned **Business Context**, B2B **People Search**, **Company Lookalike**, **Email Finder**, and **Email Validation**, with previews, upfront credit quotes, and customer-run downloads for completed People Search and Company Lookalike results.
 
 This repository contains no server code. It packages the connection settings and agent skills for Enrichley's hosted MCP server at `https://mcp.enrichley.io/mcp`.
 
@@ -93,7 +93,7 @@ https://mcp.enrichley.io/mcp
 
 Every customer-visible plugin payload change requires a new semantic version. This includes changes under `skills/`, either host manifest, the MCP or app mapping, and plugin assets. CI compares those paths with the branch base and fails when their content changes without an increased plugin version. The [public release ledger](docs/release-ledger.md) contains only public package and compatibility facts; detailed operational evidence stays outside this public repository.
 
-Version `0.1.8` is the current distribution-integrity release. Public repository, contract, package, manifest, Claude, and Codex validations pass. MCP tools, schemas, behavior, endpoints, authentication, billing, customer workflows, and runtime contracts are unchanged.
+Version `0.1.9` is the additive Business Context distribution release. It updates the public package and skill for the 27-tool MCP surface while preserving the existing endpoint, authentication, billing safeguards, and lead-search workflows. Fresh authenticated host verification is pending.
 
 Maintainers use the same public-boundary and public-contract validators locally and in public CI. Run current-tree validation while preparing a commit:
 
