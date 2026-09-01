@@ -1,6 +1,6 @@
 # Public Repository Policy
 
-This repository is the public distribution package for the Enrichley MCP plugin. It contains customer-facing manifests, connection metadata, skills, assets, and sanitized documentation. It is not an operational evidence store.
+This repository is the public distribution package for the Enrichley MCP plugin. It contains customer-facing manifests, connection metadata, skills, assets, and public-safe documentation. It is not an operational evidence store.
 
 ## Public boundary
 
@@ -9,7 +9,7 @@ Allowed public information includes:
 - customer installation and update instructions;
 - the production MCP URL and other intentionally public Enrichley URLs;
 - public tool and resource names, versions, behavior, and pricing rules;
-- semantic plugin versions and sanitized host-compatibility results;
+- semantic plugin versions and public host-compatibility results;
 - the registered public plugin/app identifiers required by package manifests.
 
 Do not commit:
@@ -21,11 +21,11 @@ Do not commit:
 - workflow-run identifiers or raw logs from private operational verification;
 - creator, editing-tool, document, user, or brand metadata embedded in image assets.
 
-Detailed release and runtime evidence belongs in Enrichley's private operational records. The public release ledger records only package version, public contract, host compatibility, and a sanitized verification outcome.
+Detailed release and runtime evidence belongs in Enrichley's private operational records. The public release ledger records only package version, public contract, host compatibility, and a public verification outcome.
 
-## Current distribution-integrity candidate
+## Current distribution-integrity release
 
-Version `0.1.8` adds a sanitized exact public-tool contract and introduced-history validation to the package safeguards. It changes no MCP tool, schema, behavior, endpoint, authentication flow, billing rule, or customer workflow. This candidate has not been published. The full existing-history rewrite and GitHub Support purge have also not occurred and remain separate human-gated work.
+Version `0.1.8` is the current distribution-integrity release. Public repository, contract, package, manifest, Claude, and Codex validations pass. MCP tools, schemas, behavior, endpoints, authentication flows, billing rules, customer workflows, and runtime contracts are unchanged.
 
 ## Publishing identity
 
@@ -51,7 +51,7 @@ git config core.hooksPath .githooks
 
 The commit hook checks the configured author, the boundary fixtures and current tree, and the public-contract fixtures and artifact. The push hook runs the same validators, additionally verifies that the active GitHub account is the approved publisher, and scans every commit and object introduced after `origin/main`, including the expected author and committer. These hooks are defense in depth; the GitHub `main` ruleset should independently restrict updates to the approved bot actor.
 
-Public CI repeats the boundary and contract suites without credentials. Pull requests use the pull-request base and pushes use the prior public revision as the reviewed base for introduced-history validation. The explicit all-reachable-history mode is a post-rewrite verification gate; before that rewrite, passing introduced-history validation does not assert that older public history is clean.
+Public CI repeats the boundary and contract suites without credentials. Pull requests use the pull-request base and pushes use the prior public revision as the reviewed base for introduced-history validation. The explicit all-reachable-history mode validates every reachable commit and object.
 
 ## CI disclosure behavior
 

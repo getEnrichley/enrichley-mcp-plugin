@@ -12,13 +12,13 @@ Keep these versions identical:
 
 Any change under `skills/`, `assets/`, either plugin manifest directory, `.agents/plugins/`, `.app.json`, `.mcp.json`, or `server.json` requires a higher semantic version. CI enforces this with `scripts/check-release-version.mjs`.
 
-The `0.1.8` candidate is package-only distribution-integrity work: it adds the sanitized exact public-tool contract and introduced-history repository checks without changing MCP behavior. It is not yet published. Its full existing-history rewrite and GitHub Support purge are later human-gated operations and must not be inferred from a clean candidate range.
+Version `0.1.8` is the current distribution-integrity release. Public repository, contract, package, manifest, Claude, and Codex validations pass. MCP behavior and runtime contracts are unchanged.
 
 ## Release the repository
 
 1. Confirm `main` is clean and current.
 2. Set the next version in all three version fields above.
-3. Add a candidate entry to `docs/release-ledger.md` containing only the public package purpose, public MCP contract, and sanitized host-verification target. Keep infrastructure identifiers and private operational evidence outside this repository.
+3. Add a candidate entry to `docs/release-ledger.md` containing only the public package purpose, public MCP contract, and public host-verification target. Keep infrastructure identifiers and private operational evidence outside this repository.
 4. Run the local release checks:
 
    ```sh
@@ -38,7 +38,7 @@ The `0.1.8` candidate is package-only distribution-integrity work: it adds the s
 5. Commit directly to `main` as `Enrichley Bot <agent@enrichley.com>` and push. Do not create a PR.
 6. Wait for the `validate` GitHub Actions workflow to pass. Record only its pass/fail outcome in the public ledger; do not record workflow-run or infrastructure identifiers.
 
-The introduced-history check above covers the reviewed `origin/main..HEAD` range. Run `node scripts/check-public-boundary.mjs --all-history` only as the full-history gate after an approved history rewrite. Until then, do not interpret a clean reviewed range as proof that history preceding `origin/main` is clean.
+The introduced-history check above covers the reviewed `origin/main..HEAD` range. Run `node scripts/check-public-boundary.mjs --all-history` when complete validation of every reachable commit and object is required.
 
 ## Prove Claude Code update and install
 
@@ -114,7 +114,7 @@ Use only the production connector and never confirm a paid run.
 1. Load `/using-enrichley` and call Account Status once. The Account Status card must render.
 2. Preview a known Company Lookalike discovery once. The Preview Results card must render.
 3. Prepare a one-result Company Lookalike quote once. The Run Quote card must render; do not confirm it.
-4. If a prearranged sanitized Company Lookalike preview fixture is available, call it and require `COMPANY_LOOKALIKE_PREVIEW_UNAVAILABLE`, no upstream detail, a 15-second wait before one retry, and a stop after the second matching response. Claude currently suppresses error-result attachments, so safe text instead of an error card is expected on this host. Do not substitute an arbitrary nonexistent UUID: production rejects those through the generic invalid-response guard and they do not exercise the preview-unavailable branch. If no fixture is available, leave this live-host check explicitly unclaimed and retain the deterministic skill-behavior proof instead.
+4. If a prearranged non-customer Company Lookalike preview fixture is available, call it and require `COMPANY_LOOKALIKE_PREVIEW_UNAVAILABLE`, no upstream detail, a 15-second wait before one retry, and a stop after the second matching response. Claude currently suppresses error-result attachments, so safe text instead of an error card is expected on this host. Do not substitute an arbitrary nonexistent UUID: production rejects those through the generic invalid-response guard and they do not exercise the preview-unavailable branch. If no fixture is available, leave this live-host check explicitly unclaimed and retain the deterministic skill-behavior proof instead.
 5. Request Download instructions for a known eligible completed job once. The Download card must render; do not open or execute the download.
 
 Record the results in `docs/release-ledger.md`, including any host limitation or stale-connector recovery. A model's prose about whether a card rendered is secondary evidence; the visible card is authoritative.

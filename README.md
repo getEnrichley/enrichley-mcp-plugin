@@ -85,15 +85,15 @@ https://mcp.enrichley.io/mcp
 | `assets/` | OpenAI public-directory logo and composer icon |
 | `server.json` | MCP registry manifest |
 | `skills/using-enrichley/` | Agent skill: the preview, quote, run, and download workflow |
-| `docs/release-ledger.md` | Sanitized public plugin release and compatibility record |
+| `docs/release-ledger.md` | Public plugin release and compatibility record |
 | `docs/claude-release-runbook.md` | Maintainer release, update, install, and Claude verification procedure |
 | `docs/public-repository-policy.md` | Public-boundary, publisher-identity, and disclosure rules |
 
 ## Release discipline
 
-Every customer-visible plugin payload change requires a new semantic version. This includes changes under `skills/`, either host manifest, the MCP or app mapping, and plugin assets. CI compares those paths with the branch base and fails when their content changes without an increased plugin version. The [public release ledger](docs/release-ledger.md) contains only sanitized package and compatibility facts; detailed operational evidence stays outside this public repository.
+Every customer-visible plugin payload change requires a new semantic version. This includes changes under `skills/`, either host manifest, the MCP or app mapping, and plugin assets. CI compares those paths with the branch base and fails when their content changes without an increased plugin version. The [public release ledger](docs/release-ledger.md) contains only public package and compatibility facts; detailed operational evidence stays outside this public repository.
 
-Version `0.1.8` is an unpublished package-only distribution-integrity candidate. It adds a sanitized exact public-tool contract and introduced-history validation to the repository safeguards without changing MCP tools, schemas, behavior, endpoint, authentication, billing, or customer workflows. The full existing-history rewrite, GitHub Support purge, and publication have not occurred; each remains a later human-gated operation.
+Version `0.1.8` is the current distribution-integrity release. Public repository, contract, package, manifest, Claude, and Codex validations pass. MCP tools, schemas, behavior, endpoints, authentication, billing, customer workflows, and runtime contracts are unchanged.
 
 Maintainers use the same public-boundary and public-contract validators locally and in public CI. Run current-tree validation while preparing a commit:
 
@@ -110,7 +110,7 @@ Before a push, validate every commit and object introduced after the reviewed ba
 node scripts/check-public-boundary.mjs --base origin/main --history
 ```
 
-The explicit `--all-history` mode is reserved for the post-rewrite full-history gate. Its availability does not claim that history preceding the reviewed base is already clean.
+The explicit `--all-history` mode validates every reachable commit and object in addition to the reviewed-range check.
 
 ## Pricing and account
 
