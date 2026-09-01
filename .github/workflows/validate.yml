@@ -1,0 +1,112 @@
+name: validate
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check public repository boundary and contract
+        env:
+          PUBLIC_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          node scripts/check-public-boundary.test.mjs
+          node scripts/check-public-boundary.mjs --base "$PUBLIC_BASE_SHA" --history
+          node scripts/check-public-contract.test.mjs
+          node scripts/check-public-contract.mjs
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Install Codex CLI
+        run: npm install -g @openai/codex
+
+      - name: Validate plugin manifests
+        run: claude plugin validate .
+
+      - name: Check skill command references resolve
+        run: bash scripts/check-skill-commands.sh
+
+      - name: Require a version bump for plugin payload changes
+        env:
+          RELEASE_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          node scripts/check-release-version.test.mjs
+          node scripts/check-release-version.mjs --base "$RELEASE_BASE_SHA"
+
+      - name: Check OpenAI public-directory package constraints
+        run: node scripts/check-openai-directory-package.mjs
+
+      - name: JSON manifests parse
+        run: |
+          for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json .agents/plugins/marketplace.json .codex-plugin/plugin.json .app.json .mcp.json server.json; do
+            node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" && echo "OK: $f"
+          done
+
+      - name: Check cross-host release metadata
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const read = (path) => JSON.parse(fs.readFileSync(path, 'utf8'));
+          const claude = read('.claude-plugin/plugin.json');
+          const claudeMarketplace = read('.claude-plugin/marketplace.json');
+          const codex = read('.codex-plugin/plugin.json');
+          const codexMarketplace = read('.agents/plugins/marketplace.json');
+          const app = read('.app.json');
+
+          const versions = new Set([
+            claude.version,
+            claudeMarketplace.metadata.version,
+            codex.version,
+          ]);
+          if (versions.size !== 1) throw new Error('Claude and OpenAI plugin versions must match');
+          if (claude.name !== codex.name) throw new Error('Plugin names must match across hosts');
+          if (codex.skills !== './skills/') throw new Error('OpenAI plugin must bundle skills/');
+          if (codex.apps !== './.app.json') throw new Error('OpenAI plugin must reference .app.json');
+          if (!app.apps?.enrichley?.id?.startsWith('asdk_app_')) {
+            throw new Error('OpenAI plugin must map the registered Enrichley MCP app');
+          }
+          const entry = codexMarketplace.plugins?.find((plugin) => plugin.name === codex.name);
+          if (!entry?.policy?.installation || !entry?.policy?.authentication || !entry?.category) {
+            throw new Error('OpenAI marketplace entry is incomplete');
+          }
+          console.log(`cross-host release metadata: ${codex.name}@${codex.version}`);
+          NODE
+
+      - name: Validate OpenAI plugin install
+        run: |
+          codex plugin marketplace add "$GITHUB_WORKSPACE"
+          codex plugin add enrichley@enrichley
+          codex plugin list | grep -F 'enrichley@enrichley'
+
+      - name: Validate server.json against its MCP registry schema
+        run: |
+          curl -fsSL "$(node -p "require('./server.json')['\$schema']")" -o /tmp/server.schema.json
+          npm install --no-save --prefix /tmp/ajv ajv@8 ajv-formats@3 > /dev/null
+          node -e "
+            const Ajv = require('/tmp/ajv/node_modules/ajv').default;
+            const addFormats = require('/tmp/ajv/node_modules/ajv-formats');
+            const ajv = new Ajv({ strict: false });
+            addFormats(ajv);
+            const schema = require('/tmp/server.schema.json');
+            const data = require('./server.json');
+            if (!ajv.validate(schema, data)) {
+              console.error(ajv.errors);
+              process.exit(1);
+            }
+            console.log('server.json: schema valid');
+          "

@@ -1,0 +1,18 @@
+{
+  "name": "enrichley",
+  "owner": {
+    "name": "Enrichley",
+    "url": "https://enrichley.io"
+  },
+  "metadata": {
+    "description": "Official Enrichley plugin marketplace: connect AI agents to Enrichley's lead generation and enrichment platform.",
+    "version": "0.1.8"
+  },
+  "plugins": [
+    {
+      "name": "enrichley",
+      "source": "./",
+      "description": "Find and enrich B2B leads with Enrichley: People Search, Company Lookalike, Email Finder, and Email Validation from your AI agent."
+    }
+  ]
+}

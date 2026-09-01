@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+scripts/check-publisher-identity.sh --push
+node scripts/check-public-boundary.test.mjs
+node scripts/check-public-boundary.mjs --base origin/main --history
+node scripts/check-public-contract.test.mjs
+node scripts/check-public-contract.mjs

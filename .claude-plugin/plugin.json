@@ -1,0 +1,15 @@
+{
+  "name": "enrichley",
+  "version": "0.1.8",
+  "description": "Find and enrich B2B leads with Enrichley: People Search, Company Lookalike, Email Finder, and Email Validation from your AI agent.",
+  "author": {
+    "name": "Enrichley",
+    "email": "agent@enrichley.com",
+    "url": "https://enrichley.io"
+  },
+  "homepage": "https://docs.enrichley.io",
+  "repository": "https://github.com/getEnrichley/enrichley-mcp-plugin",
+  "license": "MIT",
+  "keywords": ["mcp", "leads", "b2b", "enrichment", "email", "sales", "prospecting"],
+  "mcpServers": "./.mcp.json"
+}
