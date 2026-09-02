@@ -12,7 +12,7 @@ This ledger records only public package and compatibility facts. Infrastructure 
 
 ## 0.1.9 — Business Context distribution
 
-Status: **current additive distribution release**. The package and skill describe the public 27-tool surface; fresh authenticated host verification is pending.
+Status: **current additive distribution release; Claude Code and Claude web/Cowork verified** on 2026-09-01.
 
 | Field | Public value |
 | --- | --- |
@@ -24,10 +24,13 @@ Status: **current additive distribution release**. The package and skill describ
 
 ### Public verification status
 
-- Public repository, boundary, contract, package, and manifest checks pass locally.
+- Public repository, boundary, contract, package, and manifest checks pass locally; the public `validate` workflow passed for the `0.1.9` release commit.
 - The two Business Context tools are read-only, non-destructive, and debit zero credits.
-- Fresh authenticated host verification is pending.
-- No preview, quote confirmation, paid run, download, credential, or customer-data mutation was used for this package release.
+- Claude Code updated from `0.1.6` to `0.1.9`, remained enabled, connected to the production endpoint, and exposed the 27-tool catalog in a fresh session.
+- Claude web/Cowork loaded a fresh `0.1.9` personal-marketplace installation with one skill, one connected production connector, and the 27-tool catalog grouped as 7 interactive, 11 read-only, and 9 write/delete tools.
+- Both hosts exposed **List Business Context profiles** and **Get Business Context**. A fresh Claude conversation exposed `/using-enrichley`.
+- The personal test marketplace required the documented remove-and-readd recovery after the existing record synced to the release commit with `exec_surface_changed`.
+- No MCP tool, preview, quote confirmation, paid run, download, credential, or customer-data mutation was used for this package verification.
 
 ## 0.1.8 — Distribution-integrity release
 

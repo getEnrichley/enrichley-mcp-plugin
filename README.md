@@ -93,7 +93,7 @@ https://mcp.enrichley.io/mcp
 
 Every customer-visible plugin payload change requires a new semantic version. This includes changes under `skills/`, either host manifest, the MCP or app mapping, and plugin assets. CI compares those paths with the branch base and fails when their content changes without an increased plugin version. The [public release ledger](docs/release-ledger.md) contains only public package and compatibility facts; detailed operational evidence stays outside this public repository.
 
-Version `0.1.9` is the additive Business Context distribution release. It updates the public package and skill for the 27-tool MCP surface while preserving the existing endpoint, authentication, billing safeguards, and lead-search workflows. Fresh authenticated host verification is pending.
+Version `0.1.9` is the additive Business Context distribution release. It updates the public package and skill for the 27-tool MCP surface while preserving the existing endpoint, authentication, billing safeguards, and lead-search workflows. Fresh authenticated Claude Code and Claude web/Cowork catalog verification completed on 2026-09-01.
 
 Maintainers use the same public-boundary and public-contract validators locally and in public CI. Run current-tree validation while preparing a commit:
 
