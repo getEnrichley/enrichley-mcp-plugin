@@ -77,7 +77,7 @@ https://mcp.enrichley.io/mcp
 
 ## Release status
 
-Version `0.1.10` is the current guidance release for job auditing and paid-run confirmation. The public contract remains 27 tools.
+Version `0.1.10` is the current package release for job auditing and paid-run confirmation. Package validation passed; fresh installed-host verification remains pending. The public contract remains 27 tools.
 
 Version `0.1.9` received Claude Code and Claude web/Cowork installation and catalog verification on 2026-09-01. That check did not execute tools or paid runs. See the [release ledger](docs/release-ledger.md) for scoped compatibility outcomes.
 
