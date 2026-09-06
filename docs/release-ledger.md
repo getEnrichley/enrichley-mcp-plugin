@@ -18,7 +18,7 @@ Status: **current guidance release**.
 - Clarify confirmation-card reconciliation, terminal status, settlement, and unchanged signed evidence.
 - Focus public documentation on customer installation and product behavior.
 - Public contract: 27 tools. Hosts targeted: Claude, ChatGPT, and Codex.
-- Local boundary, contract, version, package, and shared-skill parity checks passed. Fresh `0.1.10` live host tests are not recorded; no fresh conversational paid-execution verification is claimed.
+- Local boundary, contract, version, package, and shared-skill parity checks passed. The public validation workflow passed, including its isolated Codex plugin-install check. Fresh `0.1.10` live host tests are not recorded; no fresh conversational paid-execution verification is claimed.
 
 ## 0.1.9 — Business Context distribution
 
