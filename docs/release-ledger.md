@@ -12,13 +12,13 @@ This ledger records only public package and compatibility facts. Infrastructure 
 
 ## 0.1.10 — Job auditing and confirmation guidance
 
-Status: **candidate; production and fresh host verification pending**.
+Status: **current guidance release**.
 
 - Correct job-metadata use, job/run identifiers, and saved-audience paging.
 - Clarify confirmation-card reconciliation, terminal status, settlement, and unchanged signed evidence.
 - Focus public documentation on customer installation and product behavior.
 - Public contract: 27 tools. Hosts targeted: Claude, ChatGPT, and Codex.
-- Local package verification and installed-host outcomes will be recorded after they are established. No fresh conversational paid-execution verification is claimed.
+- Local boundary, contract, version, package, and shared-skill parity checks passed. Fresh `0.1.10` live host tests are not recorded; no fresh conversational paid-execution verification is claimed.
 
 ## 0.1.9 — Business Context distribution
 

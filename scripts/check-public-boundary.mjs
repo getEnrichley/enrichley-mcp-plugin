@@ -31,12 +31,22 @@ const TEXT_RULES = [
     pattern: new RegExp("\\b(?:AK" + "IA|ASIA)[A-Z0-9]{16}\\b"),
   },
   {
+    id: "secret-provider-key",
+    // Recognizable key families, not a complete credential inventory.
+    pattern: new RegExp("\\b(?:sk" + "-(?:proj-|svcacct-|ant-api\\d+-)?[A-Za-z0-9_-]{20,}|[sr]k" + "_(?:live|test)_[A-Za-z0-9]{20,}|unkey" + "_[A-Za-z0-9_-]{20,})\\b"),
+  },
+  {
+    id: "secret-contextual-assignment",
+    // Opaque tokens need context: catch env/config assignments, including JSON.
+    pattern: /(?:^|[\s{"',])(?:[A-Z][A-Z0-9]*_)*(?:API_KEY|API_TOKEN|ACCESS_TOKEN|AUTH_TOKEN|SECRET_KEY|SECRET|PASSWORD|TOKEN)["']?\s*[:=]\s*["']?(?!(?:example|placeholder|redacted|your_|replace_|test_fixture)(?:[A-Za-z0-9_-]*)(?:["'\s,;}\]]|$))[A-Za-z0-9_+/.=-]{20,}(?=["'\s,;}\]]|$)/im,
+  },
+  {
     id: "secret-jwt",
     pattern: /\beyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\b/,
   },
   {
     id: "secret-credential-url",
-    pattern: /https?:\/\/[^/\s:@]+:[^@/\s]+@/,
+    pattern: /(?:https?|rediss?):\/\/[^/\s:@]*:[^@/\s]+@/,
   },
   {
     id: "personal-workstation-path",

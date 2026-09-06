@@ -96,6 +96,26 @@ const withRepository = (callback) => {
 };
 
 assert.deepEqual(findTextRuleIds("README.md", "Public package documentation."), []);
+
+// Synthetic credential fixtures are assembled so this test source remains public-safe.
+const syntheticPayload = "A1b2C3d4".repeat(6);
+for (const prefix of ["s" + "k-", "s" + "k-proj-", "s" + "k-ant-api03-", "s" + "k_live_", "r" + "k_test_", "un" + "key_"]) {
+  assert.ok(findTextRuleIds("fixture.txt", prefix + syntheticPayload).includes("secret-provider-key"));
+}
+for (const name of ["OPENAI_API_KEY", "ANTHROPIC_API_KEY", "CLOUDFLARE_API_TOKEN", "CLERK_SECRET_KEY", "UNKEY_TOKEN", "STRIPE_SECRET_KEY", "REDIS_PASSWORD", "UPSTASH_REDIS_REST_TOKEN"]) {
+  for (const value of [name + "=" + syntheticPayload, JSON.stringify({ [name]: syntheticPayload })]) {
+    assert.ok(findTextRuleIds("fixture.txt", value).includes("secret-contextual-assignment"));
+  }
+}
+for (const scheme of ["http", "https", "redis", "rediss"]) {
+  for (const user of ["default", ""]) {
+    assert.ok(findTextRuleIds("fixture.txt", scheme + "://" + user + ":" + syntheticPayload + "@example.invalid").includes("secret-credential-url"));
+  }
+}
+for (const safe of ["API_KEY", "API_KEY=${API_KEY}", "API_KEY=<configured privately>", "API_KEY=example_placeholder_value", "https://example.invalid/docs", "revision=" + syntheticPayload, "Bearer tokens must remain private."]) {
+  assert.deepEqual(findTextRuleIds("fixture.txt", safe), []);
+}
+
 assert.deepEqual(findTextRuleIds("README.md", "See /" + "Users/example/private checkout."), [
   "personal-workstation-path",
 ]);
@@ -123,6 +143,21 @@ assert.deepEqual(
   parsePngChunks(stripped).map(({ type }) => type),
   ["IHDR", "IDAT", "IEND"],
 );
+
+withRepository((repo) => {
+  const base = git(repo, ["rev-parse", "HEAD"]);
+  const secret = "s" + "k-proj-" + syntheticPayload;
+  writeFileSync(join(repo, "fixture.txt"), secret);
+  const current = runBoundary(repo, []);
+  expectFinding(current, "fixture.txt", "secret-provider-key");
+  assert.equal((current.stdout + current.stderr).includes(secret), false);
+  commitAll(repo, "Add synthetic credential fixture");
+  unlinkSync(join(repo, "fixture.txt"));
+  commitAll(repo, "Remove synthetic credential fixture");
+  const historical = runBoundary(repo, ["--base", base, "--history"]);
+  expectFinding(historical, "fixture.txt", "secret-provider-key");
+  assert.equal((historical.stdout + historical.stderr).includes(secret), false);
+});
 
 withRepository((repo) => {
   writeFileSync(join(repo, "opaque.dat"), Buffer.from([0xc3, 0x28, 0xff, 0xfe]));

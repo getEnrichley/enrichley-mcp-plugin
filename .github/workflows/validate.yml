@@ -12,11 +12,11 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 20
 
@@ -30,10 +30,10 @@ jobs:
           node scripts/check-public-contract.mjs
 
       - name: Install Claude Code CLI
-        run: npm install -g @anthropic-ai/claude-code
+        run: npm install -g @anthropic-ai/claude-code@2.1.263
 
       - name: Install Codex CLI
-        run: npm install -g @openai/codex
+        run: npm install -g @openai/codex@0.153.4
 
       - name: Validate plugin manifests
         run: claude plugin validate .
@@ -96,7 +96,7 @@ jobs:
       - name: Validate server.json against its MCP registry schema
         run: |
           curl -fsSL "$(node -p "require('./server.json')['\$schema']")" -o /tmp/server.schema.json
-          npm install --no-save --prefix /tmp/ajv ajv@8 ajv-formats@3 > /dev/null
+          npm install --no-save --prefix /tmp/ajv ajv@8.17.1 ajv-formats@3.0.1 > /dev/null
           node -e "
             const Ajv = require('/tmp/ajv/node_modules/ajv').default;
             const addFormats = require('/tmp/ajv/node_modules/ajv-formats');

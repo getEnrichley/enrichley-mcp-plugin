@@ -25,7 +25,7 @@ Detailed release and runtime evidence belongs in Enrichley's private operational
 
 ## Current distribution release
 
-Version `0.1.10` is a guidance-release candidate with 27 tools; production and fresh host verification are pending. Version `0.1.9` received Claude installation and catalog verification on 2026-09-01, without tool execution or paid runs. See the [release ledger](release-ledger.md).
+Version `0.1.10` is the current guidance release with 27 tools. Version `0.1.9` received Claude installation and catalog verification on 2026-09-01, without tool execution or paid runs. See the [release ledger](release-ledger.md).
 
 ## Publishing identity
 
