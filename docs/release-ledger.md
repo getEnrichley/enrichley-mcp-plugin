@@ -10,9 +10,19 @@ This ledger records only public package and compatibility facts. Infrastructure 
 4. Do not record credentials, user or account identifiers, infrastructure topology, private repository names, deployment identifiers, or non-public source revisions.
 5. A host is marked verified only after a fresh conversation loads exactly one production Enrichley connector and the expected skill version.
 
+## 0.1.10 — Job auditing and confirmation guidance
+
+Status: **candidate; production and fresh host verification pending**.
+
+- Correct job-metadata use, job/run identifiers, and saved-audience paging.
+- Clarify confirmation-card reconciliation, terminal status, settlement, and unchanged signed evidence.
+- Focus public documentation on customer installation and product behavior.
+- Public contract: 27 tools. Hosts targeted: Claude, ChatGPT, and Codex.
+- Local package verification and installed-host outcomes will be recorded after they are established. No fresh conversational paid-execution verification is claimed.
+
 ## 0.1.9 — Business Context distribution
 
-Status: **current additive distribution release; Claude Code and Claude web/Cowork verified** on 2026-09-01.
+Status: **released additive distribution; Claude Code and Claude web/Cowork installation/catalog verified** on 2026-09-01.
 
 | Field | Public value |
 | --- | --- |
@@ -29,7 +39,6 @@ Status: **current additive distribution release; Claude Code and Claude web/Cowo
 - Claude Code updated from `0.1.6` to `0.1.9`, remained enabled, connected to the production endpoint, and exposed the 27-tool catalog in a fresh session.
 - Claude web/Cowork loaded a fresh `0.1.9` personal-marketplace installation with one skill, one connected production connector, and the 27-tool catalog grouped as 7 interactive, 11 read-only, and 9 write/delete tools.
 - Both hosts exposed **List Business Context profiles** and **Get Business Context**. A fresh Claude conversation exposed `/using-enrichley`.
-- The personal test marketplace required the documented remove-and-readd recovery after the existing record synced to the release commit with `exec_surface_changed`.
 - No MCP tool, preview, quote confirmation, paid run, download, credential, or customer-data mutation was used for this package verification.
 
 ## 0.1.8 — Distribution-integrity release

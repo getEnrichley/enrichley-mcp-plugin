@@ -25,7 +25,7 @@ Detailed release and runtime evidence belongs in Enrichley's private operational
 
 ## Current distribution release
 
-Version `0.1.9` is the additive Business Context distribution release. The public contract contains 27 tools and the bundled skill adds optional customer-owned Business Context guidance. The production endpoint, app identity, authentication flow, billing safeguards, and existing lead-search workflows remain unchanged. Fresh authenticated host verification is pending.
+Version `0.1.10` is a guidance-release candidate with 27 tools; production and fresh host verification are pending. Version `0.1.9` received Claude installation and catalog verification on 2026-09-01, without tool execution or paid runs. See the [release ledger](release-ledger.md).
 
 ## Publishing identity
 
@@ -35,7 +35,7 @@ Before publishing:
 
 1. Authenticate GitHub using the approved Enrichley Bot credential supplied outside this repository.
 2. Run `scripts/check-publisher-identity.sh --push` and require it to pass without displaying any credential.
-3. Run the validation commands in `docs/claude-release-runbook.md`.
+3. Require the public CI boundary, history, contract, version, skill-reference, and package checks to pass.
 4. Push directly to `main` and confirm the public `validate` workflow passes.
 5. Inspect the published commit anonymously to confirm the author, files, and assets expose only intended public information.
 

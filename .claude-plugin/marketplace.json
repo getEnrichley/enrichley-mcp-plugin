@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Official Enrichley plugin marketplace: connect AI agents to Enrichley's lead generation and enrichment platform.",
-    "version": "0.1.9"
+    "version": "0.1.10"
   },
   "plugins": [
     {

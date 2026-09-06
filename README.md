@@ -47,19 +47,6 @@ That one install loads the `using-enrichley` skill and the production Enrichley 
 
 **Publication status:** Enrichley is not yet listed in the public Plugins Directory. Until OpenAI approves and Enrichley publishes the listing, the steps above are unavailable to external customers. Adding the MCP server in ChatGPT Developer Mode creates a connector-only test integration; it does not install this plugin bundle.
 
-### ChatGPT and Codex maintainer testing
-
-The repository includes the universal OpenAI plugin manifest used by ChatGPT and Codex. Before public publication, maintainers can add this repository as a marketplace for local testing:
-
-```sh
-codex plugin marketplace add getEnrichley/enrichley-mcp-plugin --ref main
-codex plugin add enrichley@enrichley
-```
-
-Restart the ChatGPT desktop app after adding the marketplace, then install **Enrichley** from that marketplace and start a new ChatGPT or Codex session. Repository marketplaces are an authoring and test mechanism supported by Codex CLI and the ChatGPT desktop app. They are not the external-customer installation path, and ChatGPT web users need the published universal-directory plugin.
-
-OpenAI public-directory release requirements and reviewer materials are tracked in [docs/openai-directory-submission.md](docs/openai-directory-submission.md).
-
 ### Connector-only fallback
 
 If the host supports remote MCP but not plugins, add `https://mcp.enrichley.io/mcp` as a custom connector and authenticate with your Enrichley account. This exposes the tools but does not install the `using-enrichley` skill.
@@ -86,31 +73,13 @@ https://mcp.enrichley.io/mcp
 | `server.json` | MCP registry manifest |
 | `skills/using-enrichley/` | Agent skill: the preview, quote, run, and download workflow |
 | `docs/release-ledger.md` | Public plugin release and compatibility record |
-| `docs/claude-release-runbook.md` | Maintainer release, update, install, and Claude verification procedure |
 | `docs/public-repository-policy.md` | Public-boundary, publisher-identity, and disclosure rules |
 
-## Release discipline
+## Release status
 
-Every customer-visible plugin payload change requires a new semantic version. This includes changes under `skills/`, either host manifest, the MCP or app mapping, and plugin assets. CI compares those paths with the branch base and fails when their content changes without an increased plugin version. The [public release ledger](docs/release-ledger.md) contains only public package and compatibility facts; detailed operational evidence stays outside this public repository.
+Version `0.1.10` is a candidate guidance update for job auditing and paid-run confirmation. Production and fresh host verification are pending; it is not yet a verified release. The public contract remains 27 tools.
 
-Version `0.1.9` is the additive Business Context distribution release. It updates the public package and skill for the 27-tool MCP surface while preserving the existing endpoint, authentication, billing safeguards, and lead-search workflows. Fresh authenticated Claude Code and Claude web/Cowork catalog verification completed on 2026-09-01.
-
-Maintainers use the same public-boundary and public-contract validators locally and in public CI. Run current-tree validation while preparing a commit:
-
-```sh
-node scripts/check-public-boundary.test.mjs
-node scripts/check-public-boundary.mjs
-node scripts/check-public-contract.test.mjs
-node scripts/check-public-contract.mjs
-```
-
-Before a push, validate every commit and object introduced after the reviewed base:
-
-```sh
-node scripts/check-public-boundary.mjs --base origin/main --history
-```
-
-The explicit `--all-history` mode validates every reachable commit and object in addition to the reviewed-range check.
+Version `0.1.9` received Claude Code and Claude web/Cowork installation and catalog verification on 2026-09-01. That check did not execute tools or paid runs. See the [release ledger](docs/release-ledger.md) for scoped compatibility outcomes.
 
 ## Pricing and account
 
