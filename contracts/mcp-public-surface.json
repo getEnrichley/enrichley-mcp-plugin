@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "contractVersion": "1.1.0",
   "packageName": "enrichley",
-  "appId": "asdk_app_6a8f9322fe748191b78a730e8c384bf5",
+  "appId": "asdk_app_6a9ed44d61f081918404a85352cdff2d",
   "serverName": "io.enrichley/enrichley",
   "endpoint": "https://mcp.enrichley.io/mcp",
   "toolCount": 27,

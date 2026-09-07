@@ -10,9 +10,18 @@ This ledger records only public package and compatibility facts. Infrastructure 
 4. Do not record credentials, user or account identifiers, infrastructure topology, private repository names, deployment identifiers, or non-public source revisions.
 5. A host is marked verified only after a fresh conversation loads exactly one production Enrichley connector and the expected skill version.
 
+## 0.1.11 — App mapping
+
+Status: **app-mapping-only package release; fresh installed-package verification pending**.
+
+- Updates the registered app association. The public contract remains 27 tools; no endpoint, schema, skill, billing, authentication flow, or runtime behavior changed.
+- Replacement ChatGPT registration verification: both Business Context reads, Account Status, explicit People Search List Jobs, and a returned-ID metadata lookup passed. An unrelated negative prompt made no Enrichley call.
+- No preview, mutation, validation, download, or paid action occurred during those registration checks.
+- Registration verification is distinct from fresh installed-package verification, which remains pending until after publication.
+
 ## 0.1.10 — Job auditing and confirmation guidance
 
-Status: **current guidance release**.
+Status: **previous guidance release**.
 
 - Correct job-metadata use, job/run identifiers, and saved-audience paging.
 - Clarify confirmation-card reconciliation, terminal status, settlement, and unchanged signed evidence.

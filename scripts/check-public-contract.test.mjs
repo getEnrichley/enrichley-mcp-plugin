@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { findPublicContractRuleIds } from "./check-public-contract.mjs";
+import { findPublicContractRuleIds, findAppMappingRuleIds } from "./check-public-contract.mjs";
 
 const expectedTools = [
   "enrichley_get_account_status",
@@ -36,7 +36,7 @@ const validContract = {
   schemaVersion: 1,
   contractVersion: "1.1.0",
   packageName: "enrichley",
-  appId: "asdk_app_6a8f9322fe748191b78a730e8c384bf5",
+  appId: "asdk_app_fixture",
   serverName: "io.enrichley/enrichley",
   endpoint: "https://mcp.enrichley.io/mcp",
   toolCount: 27,
@@ -124,3 +124,14 @@ assert.match(publicSkill, /never show it in ordinary prose/i);
 assert.match(publicSkill, /Never ask for or accept the key's value/i);
 
 console.log("check-public-contract tests: OK");
+
+// Registration consistency is derived from the package mapping, not a pinned ID.
+for (const id of ["asdk_app_fixture", "asdk_app_replacement"]) {
+  const candidate = { ...validContract, appId: id };
+  assert.deepEqual(findPublicContractRuleIds(candidate, validSkill), []);
+  assert.deepEqual(findAppMappingRuleIds(candidate, { apps: { enrichley: { id } } }), []);
+  assert.deepEqual(findAppMappingRuleIds(candidate, { apps: { enrichley: { id: "asdk_app_other" } } }), ["contract-app-id"]);
+}
+for (const app of [null, {}, { apps: {} }, { apps: { enrichley: { id: 1 } } }]) {
+  assert.deepEqual(findAppMappingRuleIds(validContract, app), ["contract-app-id"]);
+}

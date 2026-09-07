@@ -6,7 +6,6 @@ const expectedFacts = Object.freeze({
   schemaVersion: 1,
   contractVersion: "1.1.0",
   packageName: "enrichley",
-  appId: "asdk_app_6a8f9322fe748191b78a730e8c384bf5",
   serverName: "io.enrichley/enrichley",
   endpoint: "https://mcp.enrichley.io/mcp",
   toolCount: 27,
@@ -134,7 +133,9 @@ export function findPublicContractRuleIds(contract, skillText) {
   if (contract.packageName !== expectedFacts.packageName) {
     addRule(rules, "contract-package-name");
   }
-  if (contract.appId !== expectedFacts.appId) addRule(rules, "contract-app-id");
+  if (typeof contract.appId !== "string" || !/^asdk_app_[A-Za-z0-9_-]+$/.test(contract.appId)) {
+    addRule(rules, "contract-app-id");
+  }
   if (contract.serverName !== expectedFacts.serverName) {
     addRule(rules, "contract-server-name");
   }
@@ -208,6 +209,12 @@ function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
 }
 
+export function findAppMappingRuleIds(contract, app) {
+  const mappedId = app?.apps?.[contract.packageName]?.id;
+  return typeof mappedId === "string" && /^asdk_app_[A-Za-z0-9_-]+$/.test(mappedId) && contract.appId === mappedId
+    ? [] : ["contract-app-id"];
+}
+
 function manifestRuleIds(contract, root) {
   try {
     const claude = readJson(join(root, ".claude-plugin/plugin.json"));
@@ -219,9 +226,7 @@ function manifestRuleIds(contract, root) {
     if (contract.packageName !== claude.name || contract.packageName !== codex.name) {
       addRule(rules, "contract-package-name");
     }
-    if (contract.appId !== app.apps?.[contract.packageName]?.id) {
-      addRule(rules, "contract-app-id");
-    }
+    for (const rule of findAppMappingRuleIds(contract, app)) addRule(rules, rule);
     if (contract.serverName !== server.name) addRule(rules, "contract-server-name");
     if (
       contract.endpoint !== mcp.mcpServers?.[contract.packageName]?.url ||
